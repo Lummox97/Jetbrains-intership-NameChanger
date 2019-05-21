@@ -8,15 +8,19 @@ import java.util.*;
 public class ParseJavaKt {
 	public static void main(String [] argv) {
 		List<File> arr;
+		String path = ".";
 
+		if (argv.length != 0)
+			path = argv[0];
+		
 		try {
-		arr = Files.walk(Paths.get("."))
+		arr = Files.walk(Paths.get(path))
 				   .filter(ParseJavaKt::ends)
 			   	   .map(Path::toFile)
 			 	   .collect(Collectors.toList());
 		}
 		catch(Exception e) {
-			System.out.println("Something is wrong");
+			System.out.println("No such directory");
 			return;
 		}
 
